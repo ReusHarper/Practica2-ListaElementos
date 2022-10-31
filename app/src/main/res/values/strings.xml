@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Practica2</string>
+    <string name="btn_add">Add</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_edit">Edit</string>
+    <string name="tv_team">Team</string>
+    <string name="tv_conference">Conference</string>
+    <string name="tv_division">Division</string>
 </resources>
