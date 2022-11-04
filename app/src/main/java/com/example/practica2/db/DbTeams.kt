@@ -3,6 +3,7 @@ package com.example.practica2.db
 import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
+import android.widget.Toast
 import com.example.practica2.model.Team
 
 class DbTeams(private val context: Context): DbHelper(context) {
@@ -51,7 +52,7 @@ class DbTeams(private val context: Context): DbHelper(context) {
                     cursorTeams.getString(1),
                     cursorTeams.getString(2),
                     cursorTeams.getString(3),
-                    cursorTeams.getInt(4),
+                    cursorTeams.getInt(4)
                     //cursorTeams.getString(5),
                 )
                 listTeams.add(teamTmp)
@@ -70,7 +71,9 @@ class DbTeams(private val context: Context): DbHelper(context) {
         var team: Team? = null
         var cursorTeams: Cursor? = null
 
-        cursorTeams = db.rawQuery("SELECT * FROM GAMES WHERE id = $id LIMIT 1", null)
+        cursorTeams = db.rawQuery("SELECT * FROM TEAMS WHERE id = $id LIMIT 1", null)
+
+        //println("cursorTeams[0] = ${cursorTeams.getInt(0)}, cursorTeams[1] = ${cursorTeams.getString(1)}")
 
         if(cursorTeams.moveToFirst()){
             team = Team(
@@ -78,12 +81,13 @@ class DbTeams(private val context: Context): DbHelper(context) {
                 cursorTeams.getString(1),
                 cursorTeams.getString(2),
                 cursorTeams.getString(3),
-                cursorTeams.getInt(4),
-                //cursorTeams.getString(5),
+                cursorTeams.getInt(4)
             )
         }
 
         cursorTeams.close()
+
+        println("team.name= ${team!!.name}")
 
         return team
     }
@@ -94,16 +98,20 @@ class DbTeams(private val context: Context): DbHelper(context) {
         val dbHelper = DbHelper(context)
         val db = dbHelper.writableDatabase
 
+        println("team xd: ${id}, team name: ${name}")
+        println("bandera: $banderaCorrecto")
+
         try{
             db.execSQL(
                 "UPDATE TEAMS SET " +
-                    "name = '$name', " +
-                    "division = '$division'," +
-                    "conference = '$conference' " +
-                    "titles = '$titles' " +
-                    "WHERE id = $id")
+                        "name = '$name', " +
+                        "division = '$division', " +
+                        "conference = '$conference', " +
+                        "titles = '$titles' " +
+                        "WHERE id = $id")
 
             banderaCorrecto = true
+            println("bandera 2: $banderaCorrecto")
         }catch(e: Exception){
             //Manejo de la excepción
         }finally {

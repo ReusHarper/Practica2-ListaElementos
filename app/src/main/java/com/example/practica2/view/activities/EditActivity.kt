@@ -14,7 +14,7 @@ class EditActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditBinding
 
     private lateinit var dbTeams: DbTeams
-    var game: Team? = null
+    var team: Team? = null
     var id = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,20 +30,20 @@ class EditActivity : AppCompatActivity() {
 
         dbTeams = DbTeams(this)
 
-        game = dbTeams.getTeam(id)
+        team = dbTeams.getTeam(id)
 
-        game?.let{ game ->
+        team?.let{ team ->
             with(binding){
-                tietTeamName.setText(game.name)
-                tietTeamDivision.setText(game.division)
-                tietTeamConference.setText(game.conference)
-                tietTeamTitles.setText(game.titles.toString())
+                tietTeamName.setText(team.name)
+                tietTeamDivision.setText(team.division)
+                tietTeamConference.setText(team.conference)
+                tietTeamTitles.setText(team.titles.toString())
 
             }
         }
     }
 
-    fun click(view: View) {
+    fun clickUpdate(view: View) {
         with(binding){
             when{
                 tietTeamName.text.toString().isEmpty() -> {
@@ -63,7 +63,14 @@ class EditActivity : AppCompatActivity() {
                     Toast.makeText(this@EditActivity, "Please fill all fields", Toast.LENGTH_SHORT).show()
                 }
                 else -> {
-                    if(dbTeams.updateTeam(id, tietTeamName.text.toString(), tietTeamDivision.text.toString(), tietTeamConference.text.toString(), tietTeamTitles.text.toString().toInt())){
+                    println("team id: ${id}, team name: ${tietTeamName.text.toString()}")
+                    if(dbTeams.updateTeam(
+                            id,
+                            tietTeamName.text.toString(),
+                            tietTeamDivision.text.toString(),
+                            tietTeamConference.text.toString(),
+                            tietTeamTitles.text.toString().toInt())
+                    ){
                         Toast.makeText(this@EditActivity, "Registro actualizado exitosamente", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this@EditActivity, DetailsActivity::class.java)
                         intent.putExtra("ID", id)

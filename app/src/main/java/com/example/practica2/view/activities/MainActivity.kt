@@ -23,9 +23,9 @@ class MainActivity : AppCompatActivity() {
     //private lateinit var adapter: TeamAdapter
     private val llmanager = LinearLayoutManager(this)
 
-    private lateinit var dbTeams: DbTeams
-    private var team: Team? = null
-    private var id = 0
+    lateinit var dbTeams: DbTeams
+    var team: Team? = null
+    var id = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +80,12 @@ class MainActivity : AppCompatActivity() {
         //Manejamos el click del elemento en el recycler view
         val intent = Intent(this, DetailsActivity::class.java)
         intent.putExtra("ID", team.id)
+
+        Toast.makeText(
+            this,
+            "Elemento seleccionado: $intent con ID ${team.id}",
+            Toast.LENGTH_SHORT
+        ).show()
 
         startActivity(intent)
         finish()

@@ -1,10 +1,14 @@
 package com.example.practica2.view.activities
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputType
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import com.example.practica2.R
 import com.example.practica2.databinding.ActivityDetailsBinding
 import com.example.practica2.db.DbTeams
 import com.example.practica2.model.Team
@@ -29,18 +33,19 @@ class DetailsActivity : AppCompatActivity() {
 
         }
 
-        //dbTeams = DbTeams(this)
 
-        //team = dbTeams.getTeam(id)
+
+        dbTeams = DbTeams(this)
+
+        team = dbTeams.getTeam(id)
 
 
         Toast.makeText(
             this,
-            "ID: ${team!!.id}",
+            "ID: ${id}",
             Toast.LENGTH_SHORT
         ).show()
 
-        /*
         team?.let{ team ->
             with(binding){
                 tietTeamName.setText(team.name)
@@ -56,18 +61,10 @@ class DetailsActivity : AppCompatActivity() {
             }
         }
 
-         */
     }
 
     fun click(view: View) {
 
-        Toast.makeText(
-            this,
-            "Prueba",
-            Toast.LENGTH_SHORT
-        ).show()
-
-        /*
         when(view.id){
             R.id.btnTeamEdit -> {
                 val intent = Intent(this, EditActivity::class.java)
@@ -97,7 +94,7 @@ class DetailsActivity : AppCompatActivity() {
 
             }
         }
-         */
+
     }
 
     override fun onBackPressed() {
