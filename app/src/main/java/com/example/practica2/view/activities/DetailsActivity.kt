@@ -33,18 +33,8 @@ class DetailsActivity : AppCompatActivity() {
 
         }
 
-
-
         dbTeams = DbTeams(this)
-
         team = dbTeams.getTeam(id)
-
-
-        Toast.makeText(
-            this,
-            "ID: ${id}",
-            Toast.LENGTH_SHORT
-        ).show()
 
         team?.let{ team ->
             with(binding){
@@ -64,7 +54,6 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     fun click(view: View) {
-
         when(view.id){
             R.id.btnTeamEdit -> {
                 val intent = Intent(this, EditActivity::class.java)
@@ -73,8 +62,6 @@ class DetailsActivity : AppCompatActivity() {
                 finish()
             }
             R.id.btnTeamDelete -> {
-                //Aquí iría el código para borrar el registro
-
                 AlertDialog.Builder(this)
                     .setTitle("Confirm")
                     .setMessage("Do you really want to delete the game ${team?.name}?")
@@ -91,10 +78,8 @@ class DetailsActivity : AppCompatActivity() {
                         dialog.dismiss()
                     })
                     .show()
-
             }
         }
-
     }
 
     override fun onBackPressed() {

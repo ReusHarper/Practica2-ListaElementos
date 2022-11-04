@@ -53,26 +53,6 @@ class MainActivity : AppCompatActivity() {
                 startActivity(Intent(this, AddActivity::class.java))
                 finish()
             }
-            R.id.btnDelete -> {
-
-                AlertDialog.Builder(this)
-                    .setTitle("Confirm")
-                    .setMessage("Do you really want to delete the game ${team?.name}?")
-                    .setPositiveButton("Aceptar", DialogInterface.OnClickListener { dialog, which ->
-                        if(dbTeams.deleteTeam(id)){
-                            Toast.makeText(this@MainActivity, "Registry deleted successfully", Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(this@MainActivity, MainActivity::class.java))
-                            finish()
-                        }else{
-                            Toast.makeText(this@MainActivity, "Delete failed", Toast.LENGTH_SHORT).show()
-                        }
-                    })
-                    .setNegativeButton("Cancelar", DialogInterface.OnClickListener { dialog, which ->
-                        dialog.dismiss()
-                    })
-                    .show()
-
-            }
         }
     }
 
@@ -81,96 +61,8 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, DetailsActivity::class.java)
         intent.putExtra("ID", team.id)
 
-        Toast.makeText(
-            this,
-            "Elemento seleccionado: $intent con ID ${team.id}",
-            Toast.LENGTH_SHORT
-        ).show()
-
         startActivity(intent)
         finish()
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*
-    private fun initRecyclerView() {
-        // Se asigna la lista mutable al adapter para que modifique el contenido del recycler view
-        adapter = TeamAdapter(this, listTeams)
-        val manager = LinearLayoutManager(this)
-
-        // El LinearLayoutManager se encarga de mostrar los items de manera en forma de listado unilateral
-        binding.rvTeams.layoutManager = manager
-        // Pasamos los items creados desde el TeamsProvider al adapter
-        binding.rvTeams.adapter = adapter
-    }
-
-    private fun onItemSelected(team: Team) {
-        Toast.makeText(
-            this,
-            team.name,
-            Toast.LENGTH_SHORT
-        ).show()
-    }
-
-    private fun onItemDeleted(position: Int) {
-        // Borrado del item en la lista
-        teamMutableList.removeAt(position)
-
-        // Notificamos al recyclerview el item eliminado del listado
-        adapter.notifyItemRemoved(position)
-    }
-
-    // Se manda a llamar a la activity Add cuando se oprima el boton de agregar
-    fun onItemAdd(view: View) {
-        startActivity(Intent(this, AddActivity::class.java))
-        finish()
-    }
-
-     */
 
 }

@@ -38,7 +38,6 @@ class EditActivity : AppCompatActivity() {
                 tietTeamDivision.setText(team.division)
                 tietTeamConference.setText(team.conference)
                 tietTeamTitles.setText(team.titles.toString())
-
             }
         }
     }
@@ -63,7 +62,6 @@ class EditActivity : AppCompatActivity() {
                     Toast.makeText(this@EditActivity, "Please fill all fields", Toast.LENGTH_SHORT).show()
                 }
                 else -> {
-                    println("team id: ${id}, team name: ${tietTeamName.text.toString()}")
                     if(dbTeams.updateTeam(
                             id,
                             tietTeamName.text.toString(),
@@ -79,7 +77,6 @@ class EditActivity : AppCompatActivity() {
                     }else{
                         Toast.makeText(this@EditActivity, "Error al actualizar el registro", Toast.LENGTH_SHORT).show()
                     }
-
                 }
             }
         }
