@@ -9,5 +9,5 @@ data class Team (
     val division: String,
     val conference: String,
     val titles: Int,
-    val logo: String?,
+    //val logo: String?,
 )
